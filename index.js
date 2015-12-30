@@ -2,7 +2,7 @@ var bs = require('fs-blob-store')
 var B2 = require('blake2s')
 var sink = require('stream-sink')
 
-var blobs = bs('.dump')
+var blobs = bs((process.env.HOME || process.env.USERPROFILE) + '/.cdump')
 
 var makePath = function (hash) {
   return hash.substr(0, 2) + '/' +
@@ -24,9 +24,7 @@ module.exports = {
     })
   },
   get: function (hash, cb) {
-    var rs = blobs.createReadStream({
-      key: makePath(hash)
-    })
+    var rs = this.stream(hash)
     rs.pipe(sink())
       .on('data', function (data) {
         cb(null, data)
@@ -34,5 +32,10 @@ module.exports = {
       .on('error', function (err) {
         cb(err)
       })
+  },
+  stream: function (hash) {
+    return blobs.createReadStream({
+      key: makePath(hash)
+    })
   }
 }
