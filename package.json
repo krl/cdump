@@ -1,0 +1,28 @@
+{
+  "name": "cdump",
+  "version": "1.0.0",
+  "description": "simple content-addressed-blob storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krl/cdump"
+  },
+  "author": "Kristoffer Ström <kristoffer@rymdkoloni.se>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krl/cdump/issues"
+  },
+  "homepage": "https://github.com/krl/cdump",
+  "dependencies": {
+    "blake2s": "^1.1.0",
+    "fs-blob-store": "^5.2.1",
+    "stream-sink": "^1.2.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.5.0",
+    "tape": "^4.4.0"
+  }
+}
