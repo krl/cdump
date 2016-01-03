@@ -20,18 +20,15 @@ module.exports = {
     })
     ws.write(blob)
     ws.end(function () {
+      // make sure it's written before returning
       cb(null, hash)
     })
   },
   get: function (hash, cb) {
     var rs = this.stream(hash)
     rs.pipe(sink())
-      .on('data', function (data) {
-        cb(null, data)
-      })
-      .on('error', function (err) {
-        cb(err)
-      })
+      .on('data', function (data) { cb(null, data) })
+      .on('error', function (err) { cb(err) })
   },
   stream: function (hash) {
     return blobs.createReadStream({
